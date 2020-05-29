@@ -2,13 +2,14 @@
 # coding: utf-8
 
 # Dependencies
-# from splinter import Browser
-# from bs4 import BeautifulSoup as bs
-# import time
-# import pandas as pd
+from splinter import Browser
+from bs4 import BeautifulSoup as bs
+import time
+import pandas as pd
 
 
-def scraper():
+
+def scrape():
     # Initialize browser and open URL
     executable_path = {'executable_path': 'chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=False)
@@ -34,8 +35,8 @@ def scraper():
     # Initialize browser and open URL
     executable_path = {'executable_path': 'chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=False)
-    url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
-    browser.visit(url)
+    url = 'https://www.jpl.nasa.gov/'
+    browser.visit(url+"/spaceimages/?search=&category=Mars")
     time.sleep(5)
 
     browser.click_link_by_partial_text('FULL IMAGE')
@@ -78,10 +79,15 @@ def scraper():
     url = 'https://space-facts.com/mars/'
 
     table_df = pd.read_html(url)[0]
+    table_df.columns = ['Facts', 'Measurement']
+    table_df.set_index('Facts', inplace=True)
     table_df
+    
 
-    facts = table_df.to_html()
+    facts = table_df.to_html(classes="table")
     facts
+
+    browser.quit()
 
 
     # ### Mars Hemispheres
@@ -90,8 +96,8 @@ def scraper():
     # Initialize browser and open URL
     executable_path = {'executable_path': 'chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=False)
-    url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
-    browser.visit(url)
+    url = 'https://astrogeology.usgs.gov/'
+    browser.visit(url+"search/results?q=hemisphere+enhanced&k1=target&v1=Mars")
     time.sleep(3)
     browser.click_link_by_partial_text('Cerberus Hemisphere Enhanced')
     time.sleep(3)
@@ -108,8 +114,8 @@ def scraper():
     # Initialize browser and open URL
     executable_path = {'executable_path': 'chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=False)
-    url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
-    browser.visit(url)
+    url = 'https://astrogeology.usgs.gov/'
+    browser.visit(url+"search/results?q=hemisphere+enhanced&k1=target&v1=Mars")
     time.sleep(3)
     browser.click_link_by_partial_text('Schiaparelli Hemisphere Enhanced')
     time.sleep(3)
@@ -126,8 +132,8 @@ def scraper():
     # Initialize browser and open URL
     executable_path = {'executable_path': 'chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=False)
-    url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
-    browser.visit(url)
+    url = 'https://astrogeology.usgs.gov/'
+    browser.visit(url+"search/results?q=hemisphere+enhanced&k1=target&v1=Mars")
     time.sleep(3)
     browser.click_link_by_partial_text('Syrtis Major Hemisphere Enhanced')
     time.sleep(3)
@@ -144,8 +150,8 @@ def scraper():
     # Initialize browser and open URL
     executable_path = {'executable_path': 'chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=False)
-    url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
-    browser.visit(url)
+    url = 'https://astrogeology.usgs.gov/'
+    browser.visit(url+"search/results?q=hemisphere+enhanced&k1=target&v1=Mars")
     time.sleep(3)
     browser.click_link_by_partial_text('Valles Marineris Hemisphere Enhanced')
     time.sleep(3)

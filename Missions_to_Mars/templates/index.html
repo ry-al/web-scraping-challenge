@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Data</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    #hemisphere {text-align: center;}
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+    <h3>Latest News on Mars</h3>
+    <h6><strong>{{ mars.news_title }}</strong></h6>
+    <h6>{{ mars.news_p }}</h6>
+
+
+    
+    <div class="row">
+      <div class="col-md-8">
+        <h3> Featured Mars Image</h3>
+        <br>
+        <img src="{{ mars.featured_img }}" alt="Image" width=700px height=500px>
+      </div>
+
+      <div class="col-md-4">
+        <div class="panel panel default">
+          <div class="panel body">
+            <h4> Weather </h4>
+            <p>{{ mars.weather }}</p>
+            <br>
+            <h4> Mars Facts </h4>
+            <p>{{ mars.facts | safe }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <h3 style="text-align:center">Mars Hemispheres</h3>
+      <hr>
+      {% for hemisphere in mars.hemisphere_img %}
+      <div class="col-lg-6" style="text-align:center">
+        <img src="{{ hemisphere.img }}" alt="Hemisphere" width=500px height=500px>
+        <h4>{{hemisphere.title}}</h4>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+
+</html>
+
+<!-- mars_dict= {
+  "news_title": news_title,
+  "news_p": news_p,
+  "featured_img": featured_img,
+  "weather": weather,
+  "facts": facts,
+  "hemisphere_img": [
+      {"title": "Cerberus Hemisphere", "img":cerberus},
+      {"title": "Schiaparelli Hemisphere", "img":schiaparelli},
+      {"title": "Syrtis Major Hemisphere", "img":syrtis},
+      {"title": "Valles Marineris Hemisphere", "img":valles}
+  ]
+} -->
+<!-- <div class="card">
+  <img src="img_avatar.png" alt="Avatar" style="width:100%">
+  <div class="container">
+    <h4><b>John Doe</b></h4>
+    <p>Architect & Engineer</p>
+  </div>
+</div> -->
